@@ -17,7 +17,7 @@ export const GoogleButton = () => {
   return (
     <Button onClick={onClick}>
       <Logo src="/google-logo.svg" />
-      Google로 계속하기
+      Google로 이용하기
     </Button>
   );
 };
@@ -25,7 +25,7 @@ const Button = styled.span`
   background-color: white;
   margin-top: 50px;
   font-weight: 500;
-  width: 100%;
+  width: 80%;
   color: black;
   padding: 10px 20px;
   border-radius: 50px;

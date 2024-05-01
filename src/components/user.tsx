@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import { userStore } from "../store/userStore";
+import { auth } from "../firebase";
 
 export const User = () => {
-  const { user } = userStore();
+  const user = auth.currentUser;
   const avatar: string | undefined =
-    user.profileUrl === null ? undefined : user.profileUrl;
+    user?.photoURL === null ? undefined : user?.photoURL;
   return (
     <Container>
       <img src={avatar} alt="Photo" />
-      <h1>{user.name}</h1>
+      <h1>{user?.displayName}</h1>
     </Container>
   );
 };

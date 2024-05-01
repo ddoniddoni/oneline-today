@@ -2,11 +2,11 @@ import { Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "../firebase";
 import { useThemeStore } from "../store/themeStore";
-import { Theme } from "../theme";
+import { useEditStore } from "../store/editStore";
 
 export const Layout = () => {
-  const toggleTheme = useThemeStore((state) => state.toggleTheme);
-  const toggleState = useThemeStore((state) => state.theme);
+  const { toggleTheme, theme } = useThemeStore();
+  const { toggleEdit, edit } = useEditStore();
   const navigate = useNavigate();
   const onLogOut = async () => {
     const ok = confirm("정말 로그아웃 하시겠습니까?");
@@ -18,8 +18,11 @@ export const Layout = () => {
   return (
     <Container>
       <Wrapper>
+        <EditButton onClick={toggleEdit}>
+          {edit === false ? "Edit" : "Finish"}
+        </EditButton>
         <ThemeButton onClick={toggleTheme}>
-          {toggleState === "Light" ? "Dark" : "Light"}
+          {theme === "Light" ? "Dark" : "Light"}
         </ThemeButton>
         <LogoutButton onClick={onLogOut}>Logout</LogoutButton>
         <Outlet />
@@ -37,6 +40,7 @@ const Container = styled.div`
   background-color: ${(props) => props.theme.background};
   color: ${(props) => props.theme.color};
 `;
+
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -46,35 +50,65 @@ const Wrapper = styled.div`
   background-color: ${(props) => props.theme.background};
   color: ${(props) => props.theme.color};
 `;
+
+const EditButton = styled.button`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  right: 40px;
+  bottom: 200px;
+  border-radius: 50%;
+  border: none;
+  background-color: ${(props) => props.theme.color};
+  color: ${(props) => props.theme.background};
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.9;
+  }
+`;
+
 const ThemeButton = styled.button`
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   right: 40px;
-  bottom: 140px;
+  bottom: 120px;
   border-radius: 50%;
   border: none;
   background-color: ${(props) => props.theme.color};
   color: ${(props) => props.theme.background};
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
+  &:hover {
+    opacity: 0.9;
+  }
 `;
 const LogoutButton = styled.button`
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   right: 40px;
   bottom: 40px;
   border-radius: 50%;
   border: none;
   background-color: ${(props) => props.theme.color};
   color: ${(props) => props.theme.background};
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
+  &:hover {
+    opacity: 0.9;
+  }
 `;

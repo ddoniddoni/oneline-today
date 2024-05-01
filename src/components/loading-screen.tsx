@@ -1,7 +1,6 @@
 import { styled } from "styled-components";
-import { Theme } from "../theme";
 
-const Wrapper = styled.div<{ theme: Theme }>`
+const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
